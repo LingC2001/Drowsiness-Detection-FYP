@@ -1,0 +1,17 @@
+TRC4200/interfacing_video
+*.pt
+*.pth
+*.mkv
+*.mp4
+*.mov
+*.avi
+*.pkl
+*.zip
+simulator/DATA
+simulator/face_analysis/DATA/BULK
+simulator/face_analysis/DATA/BULK_2
+simulator/face_analysis/DATA/BULK_BIG_CSV
+simulatorface_analysis/DATA/BULK_PKL_BZ2
+simulator/pre_processing/test_data
+simulator/phys_analysis/testing
+simulator/phys_analysis/DATA
