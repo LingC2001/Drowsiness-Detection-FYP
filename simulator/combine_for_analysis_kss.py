@@ -7,7 +7,7 @@ from face_analysis.blinking.utils.get_blinking import get_blinking
 
 class DataCompiler:
     def __init__(self):
-        self.folder_path = "KSS_sort/Post"  #Main folder containing the numbers
+        self.folder_path = "KSS_sorted_features/Post"  #Main folder containing the numbers
 
         self.cap_files = {
             "awake": [],
