@@ -98,11 +98,22 @@ class DataCompiler:
                     elif i == 3:
                         cap_df.drop(cap_df.tail(lens_to_crop[i]).index, inplace=True)
 
+            if self.eeg_files[k]["path"][-27] == "a":
+                time_of_day = "afternoon" 
+            elif self.eeg_files[k]["path"][-27] == "m":
+                time_of_day = "morning"
+            elif self.eeg_files[k]["path"][-27] == "n":
+                time_of_day = "night"
+
+            time_of_day = [time_of_day] * eeg_df.shape[0]
+            time_df = pd.DataFrame({"time_of_day": time_of_day})
+
+
             kss = self.eeg_files[k]["kss"]
             kss_interpolated = np.linspace(start=kss[0], stop=kss[1], num=eeg_df.shape[0])
             kss_df = pd.DataFrame({"kss": kss_interpolated})
 
-            all_df = pd.concat([eeg_df, ecg_df, emg_df, cap_df, kss_df], axis=1)
+            all_df = pd.concat([eeg_df, ecg_df, emg_df, cap_df, time_df, kss_df], axis=1)
             
             self.df = pd.concat([self.df, all_df], axis=0)
         
