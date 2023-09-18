@@ -50,4 +50,4 @@ features = []
 for idx in column_indices:
     features.append(X.columns[idx])
 print(column_indices)
-# print(features)
+print(features)

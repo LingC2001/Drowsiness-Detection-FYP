@@ -1,3 +1,7 @@
+"""
+file for compiling features grouped by kss
+"""
+
 import pandas as pd
 import csv
 import numpy as np

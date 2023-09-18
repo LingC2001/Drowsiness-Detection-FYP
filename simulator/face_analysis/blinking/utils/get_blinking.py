@@ -10,9 +10,12 @@ def running_mean(x, N):
     cumsum = np.cumsum(np.insert(x, 0, 0)) 
     return (cumsum[N:] - cumsum[:-N]) / float(N)
 
-def get_blinking(times, ears, display=False):
+def get_blinking(times, ears, display=False, get_blink_duration=False):
     fs = 60
     
+    if len(ears) == 0:
+        return 0, 0, 0, 0, 0
+
     # Remove -1000s
     filtered_ears = []
     filtered_times = []
@@ -30,9 +33,13 @@ def get_blinking(times, ears, display=False):
         if ears[i] < 1 and ears[i] >-0.2:
             vals_to_mode.append(ears[i])
 
+    if len(vals_to_mode) == 0:
+        return 0, 0, 0, 0, 0
+
     vals,counts = np.unique(np.round(np.array(vals_to_mode), 4), return_counts=True)
     index = np.argmax(counts)
     ear_mode = vals[index]
+
 
     #print(ear_mode)
     for i in range(len(filtered_ears)):
@@ -44,15 +51,14 @@ def get_blinking(times, ears, display=False):
     peak_idx, _ = find_peaks(-filtered_ears, prominence=0.12, distance=20)
 
     # remove outlier
-    ear_mean = np.mean(filtered_ears[peak_idx])
     ear_std = np.std(filtered_ears[peak_idx])
-    print("EAR Mean: " + str(ear_mean) + " || EAR Std: " + str(ear_std)+ " || EAR Mode: " + str(ear_mode))
+    # print("EAR Mean: " + str(ear_mean) + " || EAR Std: " + str(ear_std)+ " || EAR Mode: " + str(ear_mode))
     corrected_peak_idx = []
     for i in range(len(peak_idx)):
         if filtered_ears[peak_idx[i]] < ear_mode-ear_std:
             corrected_peak_idx.append(peak_idx[i])
     peak_idx = corrected_peak_idx
-    print(f'Total blinks: {len(peak_idx)}')
+    # print(f'Total blinks: {len(peak_idx)}')
 
 
     # Calculating blink rate
@@ -60,6 +66,35 @@ def get_blinking(times, ears, display=False):
     total_blinks = len(peak_idx)
     avg_blink_rate_per_min = total_blinks/(len(times)/60/60)
     #print(avg_blink_rate_per_min)
+
+
+    # calculating blink duration
+    blink_durations = []
+    for i in range(len(peak_idx)):
+
+        idx = peak_idx[i]
+        pre_blink_idx = 0
+        while idx >= 0:
+            if filtered_ears[idx] >= ear_mode-0.5*ear_std:
+                pre_blink_idx = idx 
+                break
+            idx -= 1
+        
+        idx = peak_idx[i]
+        post_blink_idx = len(filtered_ears)-1
+        while idx <= len(filtered_ears)-1:
+            if filtered_ears[idx] >= ear_mode-0.5*ear_std:
+                post_blink_idx = idx 
+                break
+            idx += 1
+        
+        blink_durations.append((post_blink_idx-pre_blink_idx)/60)
+
+    if len(blink_durations) == 0:
+        blink_duration = 0
+    else:
+        blink_duration = np.mean(blink_durations)
+
 
     # Continuous Blinking rate
     blink_intervals = []
@@ -132,8 +167,10 @@ def get_blinking(times, ears, display=False):
         plt.title(f'Eye openess')
         plt.xlabel('Time (minutes)')
         plt.ylabel('EAR')
-        #plt.show()
+        # plt.show()
 
         
-
-    return total_blinks, avg_blink_rate_per_min, blinking_rate, blinking_rate_time
+    if get_blink_duration:
+        return total_blinks, avg_blink_rate_per_min, blinking_rate, blinking_rate_time, blink_duration
+    else:
+        return total_blinks, avg_blink_rate_per_min, blinking_rate, blinking_rate_time

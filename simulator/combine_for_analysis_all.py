@@ -1,3 +1,7 @@
+"""
+File for compiling all the features with no grouping
+"""
+
 import pandas as pd
 import csv
 import numpy as np

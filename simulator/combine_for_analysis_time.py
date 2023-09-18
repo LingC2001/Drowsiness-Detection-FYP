@@ -1,3 +1,7 @@
+"""
+file for compiling all the features grouped by time of day
+"""
+
 import pandas as pd
 import csv
 import numpy as np
