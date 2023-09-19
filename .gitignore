@@ -5,7 +5,6 @@ TRC4200/interfacing_video
 *.mp4
 *.mov
 *.avi
-*.pkl
 *.zip
 simulator/DATA
 simulator/face_analysis/DATA/BULK
