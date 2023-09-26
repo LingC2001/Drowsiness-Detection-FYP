@@ -42,10 +42,10 @@ def WE(y, level=4, wavelet='coif2'):
 
 def extract_eeg(filename):
     folder_path = "DATA/bci_filtered"
-    save_folder = "DATA/EEG_features_45s"
+    save_folder = "DATA/EEG_features_30s"
     fs = 125
-    win_size = fs*45
-    step_size = fs*30
+    win_size = fs*30
+    step_size = fs*20
     print(folder_path + '/' + filename)
     helper = CSVHelper(folder_path + '/' + filename, 
                     selectedSignals = [2,3,4], 
@@ -115,7 +115,7 @@ def extract_eeg(filename):
                 df2.loc[len(df2)] = EEG_features_out0
 
     df = pd.concat([data_eeglib, df0,df1,df2], axis=1)
-    df.to_csv(save_folder + '/' + filename[0:-13] + "_eeg_features.csv")
+    df.to_csv(save_folder + '/' + filename[0:-13] + "_eeg_features.csv", index=False)
     return filename
 
 if __name__ == '__main__':

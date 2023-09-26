@@ -1,5 +1,5 @@
 """
-File for compiling all the features with no grouping in 15 seconds intervals instead of 30 minutes with interpolation labelling
+File for compiling all the features with no grouping in X seconds intervals instead of 30 minutes with interpolation labelling
 """
 
 import pandas as pd
@@ -8,8 +8,8 @@ import os
 
 class DataCompiler:
     def __init__(self):
-        self.folder_path_pre = "KSS_sort_45/Pre"
-        self.folder_path_post = "KSS_sort_45/Post"
+        self.folder_path_pre = "KSS_sort_30/Pre"
+        self.folder_path_post = "KSS_sort_30/Post"
 
         self.cap_files = {}
         self.eeg_files = {}
@@ -128,7 +128,7 @@ class DataCompiler:
     def run(self):
         self.get_files()
         self.compile_all()
-        self.df.to_csv("features_and_labels_45s.csv", index=False)   
+        self.df.to_csv("features_and_labels_30s.csv", index=False)   
 
 
 if __name__ == "__main__":

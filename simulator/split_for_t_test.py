@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from toolz import interleave
 
-features_labels_filename = "features_and_labels_45s.csv"
+features_labels_filename = "features_and_labels_30s.csv"
 
 df = pd.read_csv(features_labels_filename)
 
@@ -23,7 +23,7 @@ for i in range(len(df)):
         else:
             awake_df.loc[len(awake_df)] = row
 kss_df = pd.concat([awake_df, drowsy_df], axis=1)[list(interleave([awake_df, drowsy_df]))]
-kss_df.to_csv("features_vs_kss_45.csv", index=False) 
+kss_df.to_csv("features_vs_kss_30.csv", index=False) 
 
 
 # features split by time of day
@@ -47,4 +47,4 @@ for i in range(len(df)):
             n_df.loc[len(n_df)] = row
 
 tod_df = pd.concat([m_df, a_df, n_df], axis=1)[list(interleave([m_df, a_df, n_df]))]
-tod_df.to_csv("features_vs_time_of_day_45.csv", index=False) 
+tod_df.to_csv("features_vs_time_of_day_30.csv", index=False) 
