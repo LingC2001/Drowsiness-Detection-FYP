@@ -98,7 +98,7 @@ def extract_eeg(filename):
             wave_ent0 = WE(data)
 
             # OTHER FEATURES
-            EEG_mean0 = np.nanmedian(data)
+            EEG_mean0 = np.nanmean(data)
             EEG_std0 = np.nanstd(data)
             EEG_kurt0 = stats.kurtosis(data, nan_policy='omit')
             EEG_var0 = np.nanvar(data)
