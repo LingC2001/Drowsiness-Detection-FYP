@@ -1,0 +1,11 @@
+,time_of_day,morn vs afternoon,morn vs night,afternoong vs night
+0,n_sample time 1,15,15,16
+1,n_sample time 2,16,15,15
+2,mean_time_1,3.6,3.6,5.125
+3,std_time_1,1.254325848148452,1.254325848148452,1.4086784586980805
+4,mean_time_2,5.125,5.8,5.8
+5,std_time_2,1.4086784586980805,1.6,1.6
+6,t-val,-3.07138885450626,-4.048894711782065,-1.2075738728751897
+7,p-val,0.0022991214988169677,0.00018426283384109107,0.1184839865921222
+8,alternative,less,less,less
+9,usable?,True,True,False

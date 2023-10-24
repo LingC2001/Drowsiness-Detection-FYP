@@ -244,6 +244,7 @@ if __name__ == '__main__':
                         
                         if display:
                             # Flip the image horizontally for a selfie-view display.
+                            img = 
                             cv2.imshow('MediaPipe Face Mesh', cv2.flip(image, 1))
                             if cv2.waitKey(1) & 0xFF == 27:
                                 break

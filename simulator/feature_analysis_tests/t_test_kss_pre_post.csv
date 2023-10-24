@@ -1,0 +1,11 @@
+,Survey time,pre vs post
+0,n_sample pre,46
+1,n_sample post,46
+2,mean_pre,4.8478260869565215
+3,std_pre,1.6935605829184626
+4,mean_post,6.043478260869565
+5,std_post,1.9555553168738278
+6,t-val,-3.100430388970298
+7,p-val,0.0012899808461804046
+8,alternative,less
+9,usable?,True
